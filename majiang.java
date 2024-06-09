@@ -91,7 +91,7 @@ class Background extends JFrame{
                 //addButton.setBounds(645, 435, 40, 25);
                 addButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        if((newButtonCount%3)!=2){
+                        if((newButtonCount%3)!=1){
                             JOptionPane.showMessageDialog(frame, "Nooooooooo!");
                         }
                         //
