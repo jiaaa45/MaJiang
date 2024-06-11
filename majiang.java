@@ -1,19 +1,24 @@
-package finalllll_project;
-
 import java.awt.*;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.Timer;
 
 public class majiang extends JFrame {
+    private static HashMap<String,List<Character>> map = new HashMap<>();
     public static void main(String[] args) {
         Background bg = new Background();//start, Instruction for Use
-        
+
+    }
+    public static void returnMap(HashMap<String,List<Character>> mapp){
+        map = mapp;
+        for (String key : map.keySet()) {
+            System.out.println("Key: " + key + ", Value: " + map.get(key));
+        }
     }
 
 }
@@ -24,8 +29,9 @@ class Background extends JFrame{
     private JPanel newButtonPanel;
     private int newButtonCount = 0;
     private JFrame frame;
-    private HashMap<String,Integer> time = new HashMap<>();
-    final String PATH = "/image/";
+    private HashMap<Character,Integer> time = new HashMap<>();
+    private HashMap<String,List<Character>> map = new HashMap<>();
+    final String PATH = "image\\";
     public Background(){//main windows
         super("majiang");//window name
         this.setSize(700,700);//size
@@ -33,7 +39,7 @@ class Background extends JFrame{
         this.setLayout(null);//set by myself
         this.addWindowListener(new wap());
 
-        ImageIcon imageIcon = new ImageIcon("/image/start.jpg");
+        ImageIcon imageIcon = new ImageIcon("image\\start.jpg");
         backgroundLabel = new JLabel(imageIcon);
         backgroundLabel.setBounds(0, 0, 700, 700);//(starting place,size)
         this.add(backgroundLabel);//show the starting image
@@ -94,9 +100,12 @@ class Background extends JFrame{
                         if((newButtonCount%3)!=1){
                             JOptionPane.showMessageDialog(frame, "Nooooooooo!");
                         }
-                        //
-                        //
-                        //////////
+                        else {
+                            HashMap<String,List<Character>> map = getMap();
+                            majiang.returnMap(map);
+                        }
+
+
                     }
                 });
                 getContentPane().add(addButton);
@@ -112,8 +121,8 @@ class Background extends JFrame{
         buttonPanel.setBounds(90,47,520,243);
         buttonPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         getContentPane().add(buttonPanel);
-        ArrayList<String> buttonName = new ArrayList();
-        String all = "abcdefghiABCDEFGHI123456789";
+        /*ArrayList<String> buttonName = new ArrayList();
+        String all = "abcdefghiABCDEFGHI123456789";//name
         for(char c : all.toCharArray()){
             String a = Character.toString(c);
             buttonName.add(a);
@@ -130,21 +139,84 @@ class Background extends JFrame{
             JButton button = createButton(new ImageIcon(PATH+buttonName.get(i)+".jpg"), buttonName.get(i));
             buttonPanel.add(button);
             time.put(buttonName.get(i),0);
+        }*/
+        ArrayList<Character> chain = new ArrayList();
+        String a = "chain";
+        map.put(a,new LinkedList<>());
+        String chainName = "123456789";
+        for(char c : chainName.toCharArray()){
+            chain.add(c);
         }
+        for(int i = 0;i<chain.size();i++){
+            JButton button = createButton(new ImageIcon(PATH+"chain"+(i+1)+".jpg"), chain.get(i),a);
+            buttonPanel.add(button);
+            time.put(chain.get(i),0);
+        }
+        ArrayList<Character> million = new ArrayList();
+        a = "million";
+        map.put(a,new LinkedList<>());
+        String millionName = "abcdefghi";
+        for(char c : millionName.toCharArray()){
+            million.add(c);
+        }
+        for(int i = 0;i<million.size();i++){
+            JButton button = createButton(new ImageIcon(PATH+"million"+(i+1)+".jpg"), million.get(i),a);
+            buttonPanel.add(button);
+            time.put(million.get(i),0);
+        }
+        ArrayList<Character> cookie = new ArrayList();
+        a = "cookie";
+        map.put(a,new LinkedList<>());
+        String cookieName = "mnopqrstu";
+        for(char c : cookieName.toCharArray()){
+            cookie.add(c);
+        }
+        for(int i = 0;i<cookie.size();i++){
+            JButton button = createButton(new ImageIcon(PATH+"cookie"+(i+1)+".jpg"), cookie.get(i),a);
+            buttonPanel.add(button);
+            time.put(cookie.get(i),0);
+        }
+        ArrayList<String> buttonName = new ArrayList();
+        a = "BigWord";
+        map.put(a,new LinkedList<>());
+        String n = "ABCDEFG";
+        ArrayList<Character> BigWord = new ArrayList();
+        for(char c:n.toCharArray()){
+            BigWord.add(c);
+        }
+        buttonName.add("east");
+        buttonName.add("west");
+        buttonName.add("south");
+        buttonName.add("north");
+        buttonName.add("red");
+        buttonName.add("fa");
+        buttonName.add("white");
+        for(int i = 0;i<buttonName.size();i++){
+            JButton button = createButton(new ImageIcon(PATH+buttonName.get(i)+".jpg"), BigWord.get(i), a);
+            buttonPanel.add(button);
+            time.put(BigWord.get(i),0);
+        }
+
     }
 
-    public JButton createButton(ImageIcon icon, String name){
+    public JButton createButton(ImageIcon icon, Character name,String key){
         
         JButton button = new JButton(icon);
         button.setPreferredSize(new Dimension(40, 60));
-        button.setActionCommand(name);
+        button.setActionCommand(name.toString());
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(time.get(name)>=4){
                     JOptionPane.showMessageDialog(frame, "can't click over four time!");
                 }
-                else addNewButton(name);
+                else {
+                    List<Character> a = map.get(key);
+                    a.add(name);
+                    map.put(key,a);
+                    addNewButton(name,key,icon);
+                }
+                
             }
         });
         return button;
@@ -163,11 +235,11 @@ class Background extends JFrame{
         getContentPane().repaint();
     }
 
-    public void addNewButton(String name) {
+    public void addNewButton(Character name,String key,ImageIcon icon) {
         if (newButtonCount < 16) {
             newButtonCount++;
             time.put(name,time.get(name)+1);
-            JButton newButton = new JButton(new ImageIcon(PATH+name+".jpg"));
+            JButton newButton = new JButton(icon);
             newButton.setActionCommand("new "+name);
             newButton.setPreferredSize(new Dimension(40,60));
             newButtonPanel.add(newButton);
@@ -177,6 +249,8 @@ class Background extends JFrame{
                             "Confirm", JOptionPane.YES_NO_OPTION);
                     if (response == JOptionPane.YES_OPTION) {
                         time.put(name,time.get(name)-1);
+                        List<Character> a  = map.get(key);
+                        a.remove(Character.valueOf(name));
                         newButtonPanel.remove(newButton);
                         newButtonPanel.revalidate();
                         newButtonPanel.repaint();
@@ -189,6 +263,10 @@ class Background extends JFrame{
         } else {
             JOptionPane.showMessageDialog(this, "Maximum button limit reached (16 buttons).");
         }
+    }
+
+    public HashMap<String,List<Character>> getMap(){
+        return map;
     }
 
     class wap extends WindowAdapter{
