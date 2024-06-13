@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 
 public class majiang extends JFrame {
+    public static int check ;
     private static HashMap<String,List<Character>> map = new HashMap<>();
     public static void main(String[] args) {
         Background bg = new Background();//start, Instruction for Use
@@ -97,16 +98,17 @@ class Background extends JFrame{
                 //addButton.setBounds(645, 435, 40, 25);
                 addButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                        majiang.check++;
                         if((newButtonCount%3)!=1){
                             JOptionPane.showMessageDialog(frame, "Nooooooooo!");
+                            majiang.check--;
                         }
-                        else {
+                        else if(majiang.check < 1){
                             HashMap<String,List<Character>> map = getMap();
                             Inside.listenWhat(map);
                             //majiang.returnMap(map);
                         }
-
-
+                        else if(majiang.check >= 5)JOptionPane.showMessageDialog(frame, "Calm down!!!!!!!");
                     }
                 });
                 JButton clearButton = new JButton("clear");
@@ -294,6 +296,7 @@ class Inside{
                 count++;
                 threeOrNot[i] = 1;
             }
+            Collections.sort(inputArray[i]);
         }
 
         if(count > 2) Answer.answer(output);
@@ -330,7 +333,7 @@ class Determine{
 
     public static List<Character> possibility(List<Character> input){
         List<Character> output = new ArrayList<>();
-
+        
         return output;
     }
 
