@@ -102,7 +102,8 @@ class Background extends JFrame{
                         }
                         else {
                             HashMap<String,List<Character>> map = getMap();
-                            majiang.returnMap(map);
+                            Inside.listenWhat(map);
+                            //majiang.returnMap(map);
                         }
 
 
@@ -274,9 +275,9 @@ class Background extends JFrame{
     }
 }
 
-class inside{
+class Inside{
 
-    public List<Character> listenWhat( HashMap< String, List<Character>> input){
+    public static void listenWhat( HashMap< String, List<Character>> input){
         List<Character>[] inputArray =new ArrayList[4]; //0:coolie  1:million  2:chain  3:BigWord
         List<Character> output = new ArrayList<>() ;
         inputArray[0] = input.get("cookie");
@@ -295,11 +296,12 @@ class inside{
             }
         }
 
-        if(count > 2) return output;
+        if(count > 2) Answer.answer(output);
+        
 
         for(int i = 0;i < 4;i++){
             if(threeOrNot[i] == 0){
-                if(determine.correct3n(inputArray[i]) == false) return output;
+                if(Determine.correct3n(inputArray[i]) == false) Answer.answer(output);
                 else continue;
             }
             else if(threeOrNot[i] == 1){
@@ -308,11 +310,11 @@ class inside{
             else continue;
          }
 
-        return output;
+         Answer.answer(output);
     }
 }
 
-class determine{
+class Determine{
 
     public static List<Character> pairof(List<Character> input){
         List<Character> output = new ArrayList<>();
@@ -343,7 +345,7 @@ class determine{
 }
 class Answer{
     private JPanel answerpanel;
-    public void answer(List<Character> list){
+    public static void answer(List<Character> list){
         HashMap <Character,String> ans=new HashMap<>();
         //private JPanel answerpanel;
         String million="abcdefghi";
