@@ -9,7 +9,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 
 public class majiang extends JFrame {
-    public static int check ;
+    public static int check = 0;
     private static HashMap<String,List<Character>> map = new HashMap<>();
     public static void main(String[] args) {
         Background bg = new Background();//start, Instruction for Use
@@ -103,7 +103,7 @@ class Background extends JFrame{
                             JOptionPane.showMessageDialog(frame, "Nooooooooo!");
                             majiang.check--;
                         }
-                        else if(majiang.check < 1){
+                        else if(majiang.check == 1){
                             HashMap<String,List<Character>> map = getMap();
                             Inside.listenWhat(map);
                             //majiang.returnMap(map);
