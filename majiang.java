@@ -278,7 +278,7 @@ class Background extends JFrame{
 class Inside{
 
     public static void listenWhat( HashMap< String, List<Character>> input){
-        List<Character>[] inputArray =new ArrayList[4]; //0:coolie  1:million  2:chain  3:BigWord
+        List<Character>[] inputArray =new List[4]; //0:coolie  1:million  2:chain  3:BigWord
         List<Character> output = new ArrayList<>() ;
         inputArray[0] = input.get("cookie");
         inputArray[1] = input.get("million");
@@ -366,7 +366,7 @@ class Answer{
             if(list.contains(c))ans.put(c, "cookie"+i);
             i++;
         }
-        createAnswerButtonPanel();
+       // createAnswerButtonPanel();
 
     }
     public void createAnswerButtonPanel() {
@@ -376,9 +376,9 @@ class Answer{
         answerpanel.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 0));
         answerpanel.setBounds(7, 470, 675, 60); 
         answerpanel.setBorder(BorderFactory.createLineBorder(Color.BLUE)); 
-        getContentPane().add(answerpanel);
+        //getContentPane().add(answerpanel);
 
-        getContentPane().revalidate();
-        getContentPane().repaint();
+        //getContentPane().revalidate();
+        //getContentPane().repaint();
     }
 }
