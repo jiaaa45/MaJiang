@@ -277,34 +277,41 @@ class Background extends JFrame{
 class inside{
 
     public List<Character> listenWhat( HashMap< String, List<Character>> input){
+        List<Character>[] inputArray =new ArrayList[4]; //0:coolie  1:million  2:chain  3:BigWord
         List<Character> output = new ArrayList<>() ;
-        List<Character> cookieList = input.get("cookie");
-        List<Character> millionList = input.get("million");
-        List<Character> chainList = input.get("chain");
-        List<Character> BigWordList = input.get("BigWord");
-        boolean[] threeN = new boolean[4]; //0:coolie  1:million  2:chain  3:BigWord
-        int count =4;
-        //Collections.replaceAll(cookieList, "o", "hundrea");
-
-        if(cookieList.size() % 3 == 0){
-           threeN[0] = true;
-           count--;
+        inputArray[0] = input.get("cookie");
+        inputArray[1] = input.get("million");
+        inputArray[2] = input.get("chain");
+        inputArray[3] = input.get("BigWord");
+        int[] threeOrNot = new int[4]; //0:3n  1:!3n  2:null
+        int count = 0;
+        for(int i = 0;i < 4;i++){
+            if(inputArray[i].isEmpty()) threeOrNot[i] = 2;
+            else if(inputArray[i].size() % 3 !=0){
+                count++;
+                threeOrNot[i] = 1;
+            }
         }
-        if(millionList.size() % 3 == 0){
-            threeN[1] = true;
-            count--;
-         }
-         if(chainList.size() % 3 == 0){
-            threeN[2] = true;
-            count--;
-         }
-         if(BigWordList.size() % 3 == 0){
-            threeN[3] = true;
-            count--;
+         if(count > 2) return output;
+         for(int i = 0;i < 4;i++){
+            if(threeOrNot[i] == 0){
+
+            }
+            else if(threeOrNot[i] == 1){
+
+            }
+            else continue;
          }
 
         return output;
     }
 
+    public Boolean huOrNot(List<Character> input){
+        Boolean answer = false;
+        //adddddddddddd
+        //@510
+
+        return answer;
+    }
 
 }
