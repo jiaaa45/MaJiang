@@ -284,7 +284,9 @@ class inside{
         inputArray[2] = input.get("chain");
         inputArray[3] = input.get("BigWord");
         int[] threeOrNot = new int[4]; //0:3n  1:!3n  2:null
+        List<Character> pairOf = new ArrayList<>();
         int count = 0;
+
         for(int i = 0;i < 4;i++){
             if(inputArray[i].isEmpty()) threeOrNot[i] = 2;
             else if(inputArray[i].size() % 3 !=0){
@@ -292,21 +294,45 @@ class inside{
                 threeOrNot[i] = 1;
             }
         }
-         if(count > 2) return output;
-         for(int i = 0;i < 4;i++){
-            if(threeOrNot[i] == 0){
 
+        if(count > 2) return output;
+
+        for(int i = 0;i < 4;i++){
+            if(threeOrNot[i] == 0){
+                if(determine.correct3n(inputArray[i]) == false) return output;
+                else continue;
             }
             else if(threeOrNot[i] == 1){
-
+                
             }
             else continue;
          }
 
         return output;
     }
+}
 
-    public Boolean huOrNot(List<Character> input){
+class determine{
+
+    public static List<Character> pairof(List<Character> input){
+        List<Character> output = new ArrayList<>();
+        List<Character> have = new ArrayList<>();
+
+        for(char i : input){
+            if(!have.contains(i))  have.add(i);
+            else if(!output.contains(i)) output.add(i);
+        }
+
+        return output;
+    }
+
+    public static List<Character> possibility(List<Character> input){
+        List<Character> output = new ArrayList<>();
+
+        return output;
+    }
+
+    public static Boolean correct3n(List<Character> input){
         Boolean answer = false;
         //adddddddddddd
         //@510
