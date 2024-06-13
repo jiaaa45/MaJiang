@@ -108,7 +108,24 @@ class Background extends JFrame{
 
                     }
                 });
+                JButton clearButton = new JButton("clear");
+                clearButton.setFont(new Font("Arial", Font.PLAIN, 12));
+                clearButton.setBounds(500, 435, 80, 30);
+                clearButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        newButtonPanel.removeAll();
+                        newButtonPanel.revalidate();
+                        newButtonPanel.repaint();
+                        newButtonCount = 0;
+                        for(String keyy : map.keySet()){
+                            List<Character> value = new LinkedList();
+                            map.put(keyy,value); 
+                        }
+
+                    }
+                });
                 getContentPane().add(addButton);
+                getContentPane().add(clearButton);
             }
         });
     }
@@ -121,25 +138,6 @@ class Background extends JFrame{
         buttonPanel.setBounds(90,47,520,243);
         buttonPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         getContentPane().add(buttonPanel);
-        /*ArrayList<String> buttonName = new ArrayList();
-        String all = "abcdefghiABCDEFGHI123456789";//name
-        for(char c : all.toCharArray()){
-            String a = Character.toString(c);
-            buttonName.add(a);
-        }
-        
-        buttonName.add("east");
-        buttonName.add("west");
-        buttonName.add("south");
-        buttonName.add("north");
-        buttonName.add("red");
-        buttonName.add("fa");
-        buttonName.add("white");
-        for(int i = 0;i<buttonName.size();i++){
-            JButton button = createButton(new ImageIcon(PATH+buttonName.get(i)+".jpg"), buttonName.get(i));
-            buttonPanel.add(button);
-            time.put(buttonName.get(i),0);
-        }*/
         ArrayList<Character> chain = new ArrayList();
         String a = "chain";
         map.put(a,new LinkedList<>());
