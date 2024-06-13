@@ -275,3 +275,38 @@ class Background extends JFrame{
         }
     }
 }
+
+class inside{
+
+    public List<Character> listenWhat( HashMap< String, List<Character>> input){
+        List<Character> output = new ArrayList<>() ;
+        List<Character> cookieList = input.get("cookie");
+        List<Character> millionList = input.get("million");
+        List<Character> chainList = input.get("chain");
+        List<Character> BigWordList = input.get("BigWord");
+        boolean[] threeN = new boolean[4]; //0:coolie  1:million  2:chain  3:BigWord
+        int count =4;
+        //Collections.replaceAll(cookieList, "o", "hundrea");
+
+        if(cookieList.size() % 3 == 0){
+           threeN[0] = true;
+           count--;
+        }
+        if(millionList.size() % 3 == 0){
+            threeN[1] = true;
+            count--;
+         }
+         if(chainList.size() % 3 == 0){
+            threeN[2] = true;
+            count--;
+         }
+         if(BigWordList.size() % 3 == 0){
+            threeN[3] = true;
+            count--;
+         }
+
+        return output;
+    }
+
+
+}
