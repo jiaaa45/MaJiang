@@ -282,12 +282,13 @@ class Inside{
     public static void listenWhat( HashMap< String, List<Character>> input){
         List<Character>[] inputArray =new List[4]; //0:coolie  1:million  2:chain  3:BigWord
         List<Character> output = new ArrayList<>() ;
+        List<Character> pairOf = new ArrayList<>();
+        List<Character> possibility = new ArrayList<>() ;
         inputArray[0] = input.get("cookie");
         inputArray[1] = input.get("million");
         inputArray[2] = input.get("chain");
         inputArray[3] = input.get("BigWord");
         int[] threeOrNot = new int[4]; //0:3n  1:!3n  2:null
-        List<Character> pairOf = new ArrayList<>();
         int count = 0;
 
         for(int i = 0;i < 4;i++){
@@ -308,7 +309,8 @@ class Inside{
                 else continue;
             }
             else if(threeOrNot[i] == 1){
-                
+                pairOf = Determine.pairof(inputArray[i], pairOf);
+                possibility = Determine.possibility(inputArray[i], possibility);
             }
             else continue;
          }
@@ -319,22 +321,21 @@ class Inside{
 
 class Determine{
 
-    public static List<Character> pairof(List<Character> input){
-        List<Character> output = new ArrayList<>();
+    public static List<Character> pairof(List<Character> input, List<Character> pairof){
         List<Character> have = new ArrayList<>();
 
         for(char i : input){
             if(!have.contains(i))  have.add(i);
-            else if(!output.contains(i)) output.add(i);
+            else if(!pairof.contains(i)) pairof.add(i);
         }
 
-        return output;
+        return pairof;
     }
 
-    public static List<Character> possibility(List<Character> input){
-        List<Character> output = new ArrayList<>();
+    public static List<Character> possibility(List<Character> input, List<Character> possibility){
+  
         
-        return output;
+        return possibility;
     }
 
     public static Boolean correct3n(List<Character> input){
