@@ -439,11 +439,18 @@ class Determine{
         return true;
     }
     public static Boolean correct3nForBigWord(List<Character> input){
-        Boolean answer = false;
-        //adddddddddddd
-        //@510
-
-        return answer;
+            Collections.sort(input);
+            while (input.size()!=0) {
+                if(input.size()<3)return false;
+                char theFirstCard=input.get(0);
+                if(input.get(2).equals(theFirstCard)){
+                    input.remove(0);
+                    input.remove(0);
+                    input.remove(0);
+                }
+                else return false;
+            }
+        return true;
     }
 
     public static HashMap<Character, Integer> timeHashMap(List<Character> input){
