@@ -302,18 +302,31 @@ class Inside{
 
         if(count > 2) Answer.answer(output);
         
+        if(threeOrNot[3] == 1 || count ==1){
+            for(int i = 0;i < 3;i++) if(Determine.correct3n(inputArray[i]) == false) Answer.answer(output);
 
-        for(int i = 0;i < 4;i++){
-            if(threeOrNot[i] == 0){
-                if(Determine.correct3n(inputArray[i]) == false) Answer.answer(output);
+        }
+        else if(threeOrNot[3] == 1 || count ==2){
+
+
+        }
+        else{
+            for(int i = 0;i < 4;i++){
+                if(threeOrNot[i] == 0){
+                    if(i == 3){
+                        if(Determine.correct3nForBigWord(inputArray[i]) == false) Answer.answer(output);
+                        break;
+                    }
+                    if(Determine.correct3n(inputArray[i]) == false) Answer.answer(output);
+                    else continue;
+                }
+                else if(threeOrNot[i] == 1){
+                    pairOf = Determine.pairof(inputArray[i], pairOf);
+                    possibility = Determine.possibility(inputArray[i], possibility);
+                }
                 else continue;
             }
-            else if(threeOrNot[i] == 1){
-                pairOf = Determine.pairof(inputArray[i], pairOf);
-                possibility = Determine.possibility(inputArray[i], possibility);
-            }
-            else continue;
-         }
+        }
 
          Answer.answer(output);
     }
@@ -335,6 +348,7 @@ class Determine{
     public static List<Character> possibility(List<Character> input, List<Character> possibility){
   
         
+
         return possibility;
     }
 
@@ -344,6 +358,23 @@ class Determine{
         //@510
 
         return answer;
+    }
+    public static Boolean correct3nForBigWord(List<Character> input){
+        Boolean answer = false;
+        //adddddddddddd
+        //@510
+
+        return answer;
+    }
+
+    public static HashMap<Character, Integer> timeHashMap(List<Character> input){
+        HashMap<Character, Integer> output = new HashMap<>();
+        for(char i: input){
+            if(output.get(i) ==null) output.put(i, 1);
+            else output.put(i, output.get(i)+1);
+        }
+
+        return output;
     }
 
 }
