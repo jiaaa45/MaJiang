@@ -398,10 +398,29 @@ class Determine{
         return pairof;
     }
 
-    public static List<Character> possibility(List<Character> input, List<Character> possibility){
-  
-        
-
+   public static List<Character> possibility(List<Character> input, List<Character> possibility){
+         Set<Character> set = new HashSet<>(input);
+         HashMap<Character, Integer> times=timeHashMap(input);
+         Set<Character> tempPos = new HashSet<>();
+        for(char testCard:set){
+            if(times.get(testCard)!=4) tempPos.add(testCard);
+            if(testCard=='1'||testCard=='a'||testCard=='m'){
+                char plus=(char)(testCard+1);
+                if(times.get(plus)==null) tempPos.add(plus);
+            }
+            else if(testCard=='9'||testCard=='i'||testCard=='u'){
+                char minus=(char)(testCard-1);
+                if(times.get(minus)==null) tempPos.add(minus);
+            }
+            else{
+                char plus=(char)(testCard+1);
+                char minus=(char)(testCard-1);
+                if(times.get(plus)==null) tempPos.add(plus);
+                if(times.get(minus)==null)tempPos.add(minus);
+            }
+        }
+        possibility.addAll(tempPos);
+        //System.out.println(tempPos);
         return possibility;
     }
 
