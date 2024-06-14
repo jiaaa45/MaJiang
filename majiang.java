@@ -356,7 +356,7 @@ class Inside{
         if(count > 2) Background.answer(output);
         
         if(threeOrNot[3] == 1 || count ==1){
-            for(int i = 0;i < 3;i++) if(Determine.correct3n(inputArray[i]) == false) Answer.answer(output);
+            for(int i = 0;i < 3;i++) if(Determine.correct3n(inputArray[i]) == false) Background.answer(output);
 
         }
         else if(threeOrNot[3] == 1 || count ==2){
@@ -367,10 +367,10 @@ class Inside{
             for(int i = 0;i < 4;i++){
                 if(threeOrNot[i] == 0){
                     if(i == 3){
-                        if(Determine.correct3nForBigWord(inputArray[i]) == false) Answer.answer(output);
+                        if(Determine.correct3nForBigWord(inputArray[i]) == false) Background.answer(output);
                         break;
                     }
-                    if(Determine.correct3n(inputArray[i]) == false) Answer.answer(output);
+                    if(Determine.correct3n(inputArray[i]) == false) Background.answer(output);
                     else continue;
                 }
                 else if(threeOrNot[i] == 1){
