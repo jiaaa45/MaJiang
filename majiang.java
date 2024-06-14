@@ -305,13 +305,13 @@ class Background extends JFrame{
             if(list.contains(c))ans.put(c, "cookie"+i);
             i++;
         }
-        if(list.contains("A"))ans.put("A", "east");
-        if(list.contains("B"))ans.put("B", "west");
-        if(list.contains("C"))ans.put("C", "south");
-        if(list.contains("D"))ans.put("D", "north");
-        if(list.contains("E"))ans.put("E", "red");
-        if(list.contains("F"))ans.put("F", "fa");
-        if(list.contains("G"))ans.put("G", "white");
+        if(list.contains('A'))ans.put('A', "east");
+        if(list.contains('B'))ans.put('B', "west");
+        if(list.contains('C'))ans.put('C', "south");
+        if(list.contains('D'))ans.put('D', "north");
+        if(list.contains('E'))ans.put('E', "red");
+        if(list.contains('F'))ans.put('F', "fa");
+        if(list.contains('G'))ans.put('G', "white");
         answerpanel.removeAll();
         for(Map.Entry<Character,String> entry : ans.entrySet()){
             ImageIcon icon = new ImageIcon("image\\"+entry.getValue()+".jpg");
