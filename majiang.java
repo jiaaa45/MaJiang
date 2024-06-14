@@ -406,11 +406,37 @@ class Determine{
     }
 
     public static Boolean correct3n(List<Character> input){
-        Boolean answer = false;
-        //adddddddddddd
-        //@510
+        Collections.sort(input);
+        while (input.size()!=0) {
+            if(input.size()<3)return false;
+            char theFirstCard=input.get(0);
+            if(input.get(2).equals(theFirstCard)){
+                input.remove(0);
+                input.remove(0);
+                input.remove(0);
+            }
+            else if(input.contains((char)(theFirstCard+1))&&input.contains((char)(theFirstCard+2))){
+                input.remove(0);
+                for(int i=0;i<input.size();i++){
+                    if(input.get(i)==theFirstCard+1){
+                        input.remove(i);
+                        break;
+                    }
+                }
+                for(int i=0;i<input.size();i++){
+                    if(input.get(i)==(theFirstCard+2)){
+                        input.remove(i);
+                        break;
+                    }
+                }
 
-        return answer;
+            }
+            else{
+                System.out.println(input);
+                return false;
+            }
+        }
+        return true;
     }
     public static Boolean correct3nForBigWord(List<Character> input){
         Boolean answer = false;
