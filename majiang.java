@@ -28,6 +28,7 @@ class Background extends JFrame{
     private JLabel backgroundLabel;
     private JPanel buttonPanel;
     private JPanel newButtonPanel;
+    private static JPanel answerpanel;
     private int newButtonCount = 0;
     private JFrame frame;
     private HashMap<Character,Integer> time = new HashMap<>();
@@ -92,6 +93,7 @@ class Background extends JFrame{
             public void windowClosed(WindowEvent e){
                 createInitialButton();
                 createNewButtonPanel();
+                createAnswerButtonPanel();
                 JButton addButton = new JButton("NEXT");
                 addButton.setFont(new Font("Arial", Font.PLAIN, 12));
                 addButton.setBounds(600, 435, 80, 30);
@@ -270,6 +272,57 @@ class Background extends JFrame{
         return map;
     }
 
+    public void createAnswerButtonPanel() {
+        answerpanel = new JPanel();
+        answerpanel.setLayout(null);
+        //newButtonPanel.setLayout(new GridLayout(1, 16));
+        answerpanel.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 0));
+        answerpanel.setBounds(230, 500, 230, 60); 
+        answerpanel.setBorder(BorderFactory.createLineBorder(Color.BLUE)); 
+        getContentPane().add(answerpanel);
+
+        getContentPane().revalidate();
+        getContentPane().repaint();
+    }
+    public static void answer(List<Character> list){
+        HashMap <Character,String> ans=new HashMap<>();
+        //private JPanel answerpanel;
+        String million="abcdefghi";
+        String chain="mnopqrstu";
+        String cookie="123456789";
+        int i=1;
+        for(char c:million.toCharArray()){
+            if(list.contains(c))ans.put(c, "million"+i);
+            i++;
+        }
+        i=1;
+        for(char c:chain.toCharArray()){
+            if(list.contains(c))ans.put(c, "chain"+i);
+            i++;
+        }
+        i=1;
+        for(char c:cookie.toCharArray()){
+            if(list.contains(c))ans.put(c, "cookie"+i);
+            i++;
+        }
+        if(list.contains("A"))ans.put("A", "east");
+        if(list.contains("B"))ans.put("B", "west");
+        if(list.contains("C"))ans.put("C", "south");
+        if(list.contains("D"))ans.put("D", "north");
+        if(list.contains("E"))ans.put("E", "red");
+        if(list.contains("F"))ans.put("F", "fa");
+        if(list.contains("G"))ans.put("G", "white");
+        answerpanel.removeAll();
+        for(Map.Entry<Character,String> entry : ans.entrySet()){
+            ImageIcon icon = new ImageIcon("image\\"+entry.getValue()+".jpg");
+            JLabel label = new JLabel(icon);
+            answerpanel.add(label);
+        }
+        answerpanel.revalidate();
+        answerpanel.repaint();
+        majiang.check=0;
+    }
+
     class wap extends WindowAdapter{
         public void windowClosing(WindowEvent e){
             System.exit(0);//can close the window
@@ -300,7 +353,7 @@ class Inside{
             Collections.sort(inputArray[i]);
         }
 
-        if(count > 2) Answer.answer(output);
+        if(count > 2) Background.answer(output);
         
         if(threeOrNot[3] == 1 || count ==1){
             for(int i = 0;i < 3;i++) if(Determine.correct3n(inputArray[i]) == false) Answer.answer(output);
@@ -328,7 +381,7 @@ class Inside{
             }
         }
 
-         Answer.answer(output);
+         Background.answer(output);
     }
 }
 
