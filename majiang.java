@@ -342,7 +342,6 @@ class Inside{
         System.out.println(input);
         List<Character>[] inputArray =new List[4]; //0:coolie  1:million  2:chain  3:BigWord
         List<Character> output = new ArrayList<>() ;
-        List<Character> pairOf = new ArrayList<>();
         List<Character> possibility = new ArrayList<>() ;
         inputArray[0] = input.get("cookie");
         inputArray[1] = input.get("million");
@@ -363,7 +362,7 @@ class Inside{
 
         if(count > 2) Background.answer(output);
         
-        if(threeOrNot[3] == 1 && count ==1){
+        if(threeOrNot[3] == 1 ){
             System.out.println("only BigWord");
             for(int i = 0;i < 3;i++) if(Determine.correct3n(inputArray[i]) == false) Background.answer(output);
             HashMap<Character, Integer> times = Determine.timeHashMap(inputArray[3]);
@@ -385,16 +384,50 @@ class Inside{
                 else if(entry.getValue() == 3) time3++;
                 else if(entry.getValue() == 4) time4++;
             }
-            if(time4 > 0) Background.answer(output);
-            if(time1 == 1 && time2 == 0) output = time1Characters;
-            else if(time1 == 0 && time2 == 2) output = time2Characters;
-            else Background.answer(output);
+            if(count == 1){
+                if(time4 > 0) Background.answer(output);
+                if(time1 == 1 && time2 == 0) output = time1Characters;
+                else if(time1 == 0 && time2 == 2) output = time2Characters;
+                else Background.answer(output);
+            }
+            else if(count == 2){
+                System.out.println("Bigword and else");
+                if(time4 > 0 ||time1 > 0 || time2 > 1) Background.answer(output);
+                for(int i = 0;i < 3;i++){
+                    if(threeOrNot[i] == 0){
+                        if(Determine.correct3n(inputArray[i]) == false) Background.answer(output);
+                    }
+                    else if(threeOrNot[i] == 1){
+                        possibility = Determine.possibility(inputArray[i], possibility);
+                        //a pair in bigword
+                        for(char j : possibility){
+                            List<Character> temp = new ArrayList<>();
+                            temp.addAll(inputArray[i]); 
+                            temp.add(j);
+                            if(Determine.correct3n(temp) == true) output.add(j);
+                        }
+                        //a pair in else
+                        List<Character> pairof = new ArrayList<>();
+                        pairof = Determine.pairof(inputArray[i], pairof);
+                        for(char j : pairof){
+                            List<Character> temp = new ArrayList<>();
+                            temp.addAll(inputArray[i]);
+                            temp.remove(Character.valueOf(j));
+                            temp.remove(Character.valueOf(j));
+                            if(Determine.correct3n(temp) == true){
+                                output.addAll(time2Characters);
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                
+            }
+            
 
         }
-        else if(threeOrNot[3] == 1 && count ==2){
-            System.out.println("Bigword and else");
-            
-        }
+
         else{
             System.out.println("no bigword");
             List<Character> all = new ArrayList<>();
