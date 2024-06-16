@@ -122,7 +122,9 @@ class Background extends JFrame{
                         newButtonPanel.revalidate();
                         newButtonPanel.repaint();
                         newButtonCount = 0;
-                        time = new HashMap<>();
+                        for(Character keyy : time.keySet()){
+                            map.put(keyy,0); 
+                        }
                         for(String keyy : map.keySet()){
                             List<Character> value = new LinkedList();
                             map.put(keyy,value); 
