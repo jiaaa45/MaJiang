@@ -30,7 +30,7 @@ class Background extends JFrame{
     private JPanel newButtonPanel;
     private static JPanel answerpanel;
     private int newButtonCount = 0;
-    private JFrame frame;
+    private static JFrame frame;
     private HashMap<Character,Integer> time = new HashMap<>();
     private HashMap<String,List<Character>> map = new HashMap<>();
     final String PATH = "image\\";
