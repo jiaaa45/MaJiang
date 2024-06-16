@@ -338,7 +338,7 @@ class Background extends JFrame{
 
 class Inside{
 
-    public static void listenWhat( HashMap< String, List<Character>> input){
+    public static List<Character> listenWhat( HashMap< String, List<Character>> input){
         System.out.println(input);
         List<Character>[] inputArray =new List[4]; //0:coolie  1:million  2:chain  3:BigWord
         List<Character> output = new ArrayList<>() ;
@@ -360,11 +360,11 @@ class Inside{
             //Collections.sort(inputArray[i]);
         }
 
-        if(count > 2) Background.answer(output);
+        if(count > 2) return output;
         
         if(threeOrNot[3] == 1 ){
             System.out.println("only BigWord");
-            for(int i = 0;i < 3;i++) if(Determine.correct3n(inputArray[i]) == false) Background.answer(output);
+            for(int i = 0;i < 3;i++) if(Determine.correct3n(inputArray[i]) == false) return output;
             HashMap<Character, Integer> times = Determine.timeHashMap(inputArray[3]);
             List <Character> time1Characters = new ArrayList<Character>() ;
             List <Character> time2Characters = new ArrayList<Character>() ;
@@ -385,17 +385,17 @@ class Inside{
                 else if(entry.getValue() == 4) time4++;
             }
             if(count == 1){
-                if(time4 > 0) Background.answer(output);
+                if(time4 > 0) return output;
                 if(time1 == 1 && time2 == 0) output = time1Characters;
                 else if(time1 == 0 && time2 == 2) output = time2Characters;
-                else Background.answer(output);
+                else return output;
             }
             else if(count == 2){
                 System.out.println("Bigword and else");
-                if(time4 > 0 ||time1 > 0 || time2 > 1) Background.answer(output);
+                if(time4 > 0 ||time1 > 0 || time2 > 1) return output;
                 for(int i = 0;i < 3;i++){
                     if(threeOrNot[i] == 0){
-                        if(Determine.correct3n(inputArray[i]) == false) Background.answer(output);
+                        if(Determine.correct3n(inputArray[i]) == false) return output;
                     }
                     else if(threeOrNot[i] == 1){
                         possibility = Determine.possibility(inputArray[i], possibility);
@@ -434,10 +434,10 @@ class Inside{
             for(int i = 0;i < 4;i++){
                 if(threeOrNot[i] == 0){
                     if(i == 3){
-                        if(Determine.correct3nForBigWord(inputArray[i]) == false) Background.answer(output);
+                        if(Determine.correct3nForBigWord(inputArray[i]) == false) return output;
                         //break;
                     }
-                    if(Determine.correct3n(inputArray[i]) == false) Background.answer(output);
+                    if(Determine.correct3n(inputArray[i]) == false) return output;
                     else continue;
                 }
                 else if(threeOrNot[i] == 1){
@@ -450,7 +450,7 @@ class Inside{
             output = Determine.finalAnswer(all, possibility);
         }
         System.out.println(output);
-         Background.answer(output);
+        return output;
     }
 }
 
