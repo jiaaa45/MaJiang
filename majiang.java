@@ -280,7 +280,7 @@ class Background extends JFrame{
         answerpanel.setLayout(null);
         //newButtonPanel.setLayout(new GridLayout(1, 16));
         answerpanel.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 0));
-        answerpanel.setBounds(230, 500, 230, 60); 
+        answerpanel.setBounds(150, 500, 400, 60); 
         answerpanel.setBorder(BorderFactory.createLineBorder(Color.BLUE)); 
         getContentPane().add(answerpanel);
 
@@ -293,8 +293,8 @@ class Background extends JFrame{
         //private JPanel answerpanel;
         else{
             String million="abcdefghi";
-            String chain="mnopqrstu";
-            String cookie="123456789";
+            String cookie="mnopqrstu";
+            String chain="123456789";
             int i=1;
             for(char c:million.toCharArray()){
                 if(list.contains(c))ans.put(c, "million"+i);
@@ -420,7 +420,11 @@ class Inside{
                         }
                     }
                 }
+                
+                
             }
+            
+
         }
 
         else{
@@ -444,8 +448,8 @@ class Inside{
             }
             output = Determine.finalAnswer(all, possibility);
         }
-        Collections.sort(output);
         System.out.println(output);
+        Collections.sort(output);
         return output;
     }
 }
