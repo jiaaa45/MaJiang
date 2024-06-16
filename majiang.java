@@ -259,7 +259,7 @@ class Background extends JFrame{
         answerpanel.setLayout(null);
         //newButtonPanel.setLayout(new GridLayout(1, 16));
         answerpanel.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 0));
-        answerpanel.setBounds(230, 500, 230, 60); 
+        answerpanel.setBounds(150, 500, 400, 60); 
         answerpanel.setBorder(BorderFactory.createLineBorder(Color.BLUE)); 
         getContentPane().add(answerpanel);
 
