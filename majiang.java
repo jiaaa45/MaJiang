@@ -107,8 +107,8 @@ class Background extends JFrame{
                         }
                         else if(majiang.check == 1){
                             HashMap<String,List<Character>> map = getMap();
-                            Inside.listenWhat(map);
-                            //majiang.returnMap(map);
+                            List<Character> list=Inside.listenWhat(map);
+                            answer(list);
                         }
                         else if(majiang.check >= 5)JOptionPane.showMessageDialog(frame, "Calm down!!!!!!!");
                     }
