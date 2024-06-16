@@ -44,98 +44,77 @@ class Background extends JFrame{
         ImageIcon imageIcon = new ImageIcon("image\\start.jpg");
         backgroundLabel = new JLabel(imageIcon);
         backgroundLabel.setBounds(0, 0, 700, 700);//(starting place,size)
+        
+        JButton nextButton = new JButton("next");
+        nextButton.setFont(new Font("Arial", Font.PLAIN, 12));
+        nextButton.setBounds(600, 600, 80, 30);
+        nextButton.setBackground(new Color(193, 203, 205));
+        nextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                getContentPane().remove(backgroundLabel);//remove starting image
+                getContentPane().remove(nextButton);
+                Color background = new Color(253,249,238);//set background color by RGB
+                getContentPane().setBackground(background);
+                getContentPane().revalidate();
+                getContentPane().repaint();
+                instruction();
+
+            }
+        });
         this.add(backgroundLabel);//show the starting image
+        this.add(nextButton);
+        //this.setVisible(true);
         getContentPane().revalidate();
         getContentPane().repaint();
-
-        Timer timer = new Timer(4000, (ActionEvent e) -> {
-            getContentPane().remove(backgroundLabel);//remove starting image
-            Color background = new Color(253,249,238);//set background color by RGB
-            getContentPane().setBackground(background);
-            getContentPane().revalidate();
-            getContentPane().repaint();
-            instruction();
-        });
-        timer.setRepeats(false);//only run one time
-        timer.start();
-
     }
 
     public void instruction() {//Instruction for Use
         JDialog dialog = new JDialog(this, true);
         dialog.setUndecorated(true);
         dialog.setLayout(new BorderLayout());
-
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new BorderLayout());
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        contentPanel.setBackground(new Color(193, 203, 205));//background color
-
-        JLabel messageLabel = new JLabel("Instruction for Use", SwingConstants.CENTER);
-        messageLabel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        contentPanel.add(messageLabel, BorderLayout.CENTER);
-
-        JButton nextButton = new JButton("Next");
-        nextButton.setFocusPainted(false); // remove Dotted frame
-        nextButton.setBorderPainted(false);//remove button frame
-        nextButton.setBackground(new Color(193, 203, 205)); // button bg color
-        nextButton.setContentAreaFilled(false); 
-        nextButton.setOpaque(true); 
-        nextButton.addActionListener(e -> dialog.dispose());
-        contentPanel.add(nextButton, BorderLayout.SOUTH);
-
-        dialog.setContentPane(contentPanel);
-        dialog.setResizable(false);
-        dialog.pack();
-        dialog.setLocationRelativeTo(this);
-        dialog.setVisible(true);
-        dialog.addWindowListener(new WindowAdapter() {
-            public void windowClosed(WindowEvent e){
-                createInitialButton();
-                createNewButtonPanel();
-                createAnswerButtonPanel();
-                JButton addButton = new JButton("NEXT");
-                addButton.setFont(new Font("Arial", Font.PLAIN, 12));
-                addButton.setBounds(600, 435, 80, 30);
-                //addButton.setBounds(645, 435, 40, 25);
-                addButton.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        majiang.check++;
-                        if((newButtonCount%3)!=1){
-                            JOptionPane.showMessageDialog(frame, "Nooooooooo!");
-                            majiang.check--;
-                        }
-                        else if(majiang.check == 1){
-                            HashMap<String,List<Character>> map = getMap();
-                            List<Character> list=Inside.listenWhat(map);
-                            answer(list);
-                        }
-                        else if(majiang.check >= 5)JOptionPane.showMessageDialog(frame, "Calm down!!!!!!!");
-                    }
-                });
-                JButton clearButton = new JButton("clear");
-                clearButton.setFont(new Font("Arial", Font.PLAIN, 12));
-                clearButton.setBounds(500, 435, 80, 30);
-                clearButton.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        newButtonPanel.removeAll();
-                        newButtonPanel.revalidate();
-                        newButtonPanel.repaint();
-                        newButtonCount = 0;
-                        for(Character keyy : time.keySet()){
-                            time.put(keyy,0); 
-                        }
-                        for(String keyy : map.keySet()){
-                            List<Character> value = new LinkedList();
-                            map.put(keyy,value); 
-                        }
-
-                    }
-                });
-                getContentPane().add(addButton);
-                getContentPane().add(clearButton);
+        createInitialButton();
+        createNewButtonPanel();
+        createAnswerButtonPanel();
+        JButton addButton = new JButton("next");
+        addButton.setFont(new Font("Arial", Font.PLAIN, 12));
+        addButton.setBounds(600, 435, 80, 30);
+        //addButton.setBounds(645, 435, 40, 25);
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                majiang.check++;
+                if((newButtonCount%3)!=1){
+                    JOptionPane.showMessageDialog(frame, "Nooooooooo!");
+                    majiang.check--;
+                }
+                else if(majiang.check == 1){
+                    HashMap<String,List<Character>> map = getMap();
+                    List<Character> list=Inside.listenWhat(map);
+                    answer(list);
+                }
+                else if(majiang.check >= 5)JOptionPane.showMessageDialog(frame, "Calm down!!!!!!!");
             }
         });
+        JButton clearButton = new JButton("clear");
+        clearButton.setFont(new Font("Arial", Font.PLAIN, 12));
+        clearButton.setBounds(500, 435, 80, 30);
+        clearButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                newButtonPanel.removeAll();
+                newButtonPanel.revalidate();
+                newButtonPanel.repaint();
+                newButtonCount = 0;
+                for(Character keyy : time.keySet()){
+                    time.put(keyy,0); 
+                }
+                for(String keyy : map.keySet()){
+                    List<Character> value = new LinkedList();
+                    map.put(keyy,value); 
+                }
+
+            }
+        });
+        getContentPane().add(addButton);
+        getContentPane().add(clearButton);
     }
 
     public void createInitialButton(){
@@ -280,7 +259,7 @@ class Background extends JFrame{
         answerpanel.setLayout(null);
         //newButtonPanel.setLayout(new GridLayout(1, 16));
         answerpanel.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 0));
-        answerpanel.setBounds(150, 500, 400, 60); 
+        answerpanel.setBounds(230, 500, 230, 60); 
         answerpanel.setBorder(BorderFactory.createLineBorder(Color.BLUE)); 
         getContentPane().add(answerpanel);
 
@@ -293,8 +272,8 @@ class Background extends JFrame{
         //private JPanel answerpanel;
         else{
             String million="abcdefghi";
-            String cookie="mnopqrstu";
             String chain="123456789";
+            String cookie="mnopqrstu";
             int i=1;
             for(char c:million.toCharArray()){
                 if(list.contains(c))ans.put(c, "million"+i);
