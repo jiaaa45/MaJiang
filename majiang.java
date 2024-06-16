@@ -123,7 +123,7 @@ class Background extends JFrame{
                         newButtonPanel.repaint();
                         newButtonCount = 0;
                         for(Character keyy : time.keySet()){
-                            map.put(keyy,0); 
+                            time.put(keyy,0); 
                         }
                         for(String keyy : map.keySet()){
                             List<Character> value = new LinkedList();
