@@ -363,8 +363,6 @@ class Inside{
         if(count > 2) return output;
         
         if(threeOrNot[3] == 1 ){
-            System.out.println("only BigWord");
-            for(int i = 0;i < 3;i++) if(Determine.correct3n(inputArray[i]) == false) return output;
             HashMap<Character, Integer> times = Determine.timeHashMap(inputArray[3]);
             List <Character> time1Characters = new ArrayList<Character>() ;
             List <Character> time2Characters = new ArrayList<Character>() ;
@@ -385,6 +383,7 @@ class Inside{
                 else if(entry.getValue() == 4) time4++;
             }
             if(count == 1){
+                System.out.println("only BigWord");
                 if(time4 > 0) return output;
                 if(time1 == 1 && time2 == 0) output = time1Characters;
                 else if(time1 == 0 && time2 == 2) output = time2Characters;
@@ -450,6 +449,7 @@ class Inside{
             output = Determine.finalAnswer(all, possibility);
         }
         System.out.println(output);
+        Collections.sort(output);
         return output;
     }
 }
