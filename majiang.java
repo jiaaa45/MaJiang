@@ -289,40 +289,43 @@ class Background extends JFrame{
     }
     public static void answer(List<Character> list){
         HashMap <Character,String> ans=new HashMap<>();
+        if(list.size()==0)JOptionPane.showMessageDialog(frame, "No listen!!!!!!");
         //private JPanel answerpanel;
-        String million="abcdefghi";
-        String chain="mnopqrstu";
-        String cookie="123456789";
-        int i=1;
-        for(char c:million.toCharArray()){
-            if(list.contains(c))ans.put(c, "million"+i);
-            i++;
-        }
-        i=1;
-        for(char c:chain.toCharArray()){
-            if(list.contains(c))ans.put(c, "chain"+i);
-            i++;
-        }
-        i=1;
-        for(char c:cookie.toCharArray()){
-            if(list.contains(c))ans.put(c, "cookie"+i);
-            i++;
-        }
-        if(list.contains('A'))ans.put('A', "east");
-        if(list.contains('B'))ans.put('B', "west");
-        if(list.contains('C'))ans.put('C', "south");
-        if(list.contains('D'))ans.put('D', "north");
-        if(list.contains('E'))ans.put('E', "red");
-        if(list.contains('F'))ans.put('F', "fa");
-        if(list.contains('G'))ans.put('G', "white");
-        answerpanel.removeAll();
-        for(Map.Entry<Character,String> entry : ans.entrySet()){
-            ImageIcon icon = new ImageIcon("image\\"+entry.getValue()+".jpg");
-            JLabel label = new JLabel(icon);
-            answerpanel.add(label);
-        }
-        answerpanel.revalidate();
-        answerpanel.repaint();
+        else{
+            String million="abcdefghi";
+            String chain="mnopqrstu";
+            String cookie="123456789";
+            int i=1;
+            for(char c:million.toCharArray()){
+                if(list.contains(c))ans.put(c, "million"+i);
+                i++;
+            }
+            i=1;
+            for(char c:chain.toCharArray()){
+                if(list.contains(c))ans.put(c, "chain"+i);
+                i++;
+            }
+            i=1;
+            for(char c:cookie.toCharArray()){
+                if(list.contains(c))ans.put(c, "cookie"+i);
+                i++;
+            }
+            if(list.contains('A'))ans.put('A', "east");
+            if(list.contains('B'))ans.put('B', "west");
+            if(list.contains('C'))ans.put('C', "south");
+            if(list.contains('D'))ans.put('D', "north");
+            if(list.contains('E'))ans.put('E', "red");
+            if(list.contains('F'))ans.put('F', "fa");
+            if(list.contains('G'))ans.put('G', "white");
+            answerpanel.removeAll();
+            for(Map.Entry<Character,String> entry : ans.entrySet()){
+                ImageIcon icon = new ImageIcon("image\\"+entry.getValue()+".jpg");
+                JLabel label = new JLabel(icon);
+                answerpanel.add(label);
+            }
+            answerpanel.revalidate();
+            answerpanel.repaint();
+            }
         majiang.check=0;
     }
 
