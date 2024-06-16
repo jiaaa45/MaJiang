@@ -389,8 +389,8 @@ class Inside{
 
         }
         else if(threeOrNot[3] == 1 && count ==2){
-System.out.println("Bigword and else");
-
+            System.out.println("Bigword and else");
+            
         }
         else{
             System.out.println("no bigword");
@@ -411,7 +411,6 @@ System.out.println("Bigword and else");
                 }
                 else continue;
             }
-            //pairOf = Determine.pairof(all, pairOf);
             output = Determine.finalAnswer(all, possibility);
         }
         System.out.println(output);
@@ -431,9 +430,11 @@ class Determine{
             temp.add(i);
             pairof = pairof(temp, pairof);
             for(char j : pairof){
-                temp.remove(Character.valueOf(j));
-                temp.remove(Character.valueOf(j));
-                if(correct3n(temp) == false) continue;
+                List<Character> tempAddPossibility = new ArrayList<>();
+                tempAddPossibility.addAll(temp);
+                tempAddPossibility.remove(Character.valueOf(j));
+                tempAddPossibility.remove(Character.valueOf(j));
+                if(correct3n(tempAddPossibility) == false) continue;
                 else {
                     output.add(i);
                     break;
