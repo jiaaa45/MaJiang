@@ -333,6 +333,7 @@ class Background extends JFrame{
 class Inside{
 
     public static void listenWhat( HashMap< String, List<Character>> input){
+        System.out.println(input);
         List<Character>[] inputArray =new List[4]; //0:coolie  1:million  2:chain  3:BigWord
         List<Character> output = new ArrayList<>() ;
         List<Character> pairOf = new ArrayList<>();
@@ -350,12 +351,14 @@ class Inside{
                 count++;
                 threeOrNot[i] = 1;
             }
+            //System.out.println(threeOrNot[i]);
             //Collections.sort(inputArray[i]);
         }
 
         if(count > 2) Background.answer(output);
         
-        if(threeOrNot[3] == 1 || count ==1){
+        if(threeOrNot[3] == 1 && count ==1){
+            System.out.println("only BigWord");
             for(int i = 0;i < 3;i++) if(Determine.correct3n(inputArray[i]) == false) Background.answer(output);
             HashMap<Character, Integer> times = Determine.timeHashMap(inputArray[3]);
             List <Character> time1Characters = new ArrayList<Character>() ;
@@ -382,11 +385,12 @@ class Inside{
             else Background.answer(output);
 
         }
-        else if(threeOrNot[3] == 1 || count ==2){
-
+        else if(threeOrNot[3] == 1 && count ==2){
+System.out.println("Bigword and else");
 
         }
         else{
+            System.out.println("no bigword");
             List<Character> all = new ArrayList<>();
             for(int i = 0;i < 4;i++){
                 if(threeOrNot[i] == 0){
@@ -407,7 +411,7 @@ class Inside{
             //pairOf = Determine.pairof(all, pairOf);
             output = Determine.finalAnswer(all, possibility);
         }
-
+        System.out.println(output);
          Background.answer(output);
     }
 }
@@ -416,19 +420,22 @@ class Determine{
 
     public static List<Character> finalAnswer(List<Character> all, List<Character> possibility){
         List<Character> output = new ArrayList<>();
-        List<Character> pairof = new ArrayList<>();
+        
         for(char i : possibility){
-            List<Character> temp = all;
+            List<Character> temp = new ArrayList<>();
+            List<Character> pairof = new ArrayList<>();
+            temp.addAll(all);
             temp.add(i);
             pairof = pairof(temp, pairof);
             for(char j : pairof){
-                temp.remove(j);
-                temp.remove(j);
+                temp.remove(Character.valueOf(j));
+                temp.remove(Character.valueOf(j));
                 if(correct3n(temp) == false) continue;
                 else {
                     output.add(i);
                     break;
                 }
+                
             }
         }
         
@@ -499,7 +506,7 @@ class Determine{
 
             }
             else{
-                System.out.println(input);
+                //System.out.println(input);
                 return false;
             }
         }
