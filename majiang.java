@@ -350,13 +350,36 @@ class Inside{
                 count++;
                 threeOrNot[i] = 1;
             }
-            Collections.sort(inputArray[i]);
+            //Collections.sort(inputArray[i]);
         }
 
         if(count > 2) Background.answer(output);
         
         if(threeOrNot[3] == 1 || count ==1){
             for(int i = 0;i < 3;i++) if(Determine.correct3n(inputArray[i]) == false) Background.answer(output);
+            HashMap<Character, Integer> times = Determine.timeHashMap(inputArray[3]);
+            List <Character> time1Characters = new ArrayList<Character>() ;
+            List <Character> time2Characters = new ArrayList<Character>() ;
+            int time1 = 0;
+            int time2 = 0;
+            int time3 = 0;
+            int time4 = 0;
+            for(Map.Entry<Character, Integer> entry : times.entrySet()){
+                if(entry.getValue() == 1) {
+                    time1++;
+                    time1Characters.add(entry.getKey());
+                }
+                else if(entry.getValue() == 2) {
+                    time2++;
+                    time2Characters.add(entry.getKey());
+                }
+                else if(entry.getValue() == 3) time3++;
+                else if(entry.getValue() == 4) time4++;
+            }
+            if(time4 > 0) Background.answer(output);
+            if(time1 == 1 && time2 == 0) output = time1Characters;
+            else if(time1 == 0 && time2 == 2) output = time2Characters;
+            else Background.answer(output);
 
         }
         else if(threeOrNot[3] == 1 || count ==2){
@@ -364,21 +387,25 @@ class Inside{
 
         }
         else{
+            List<Character> all = new ArrayList<>();
             for(int i = 0;i < 4;i++){
                 if(threeOrNot[i] == 0){
                     if(i == 3){
                         if(Determine.correct3nForBigWord(inputArray[i]) == false) Background.answer(output);
-                        break;
+                        //break;
                     }
                     if(Determine.correct3n(inputArray[i]) == false) Background.answer(output);
                     else continue;
                 }
                 else if(threeOrNot[i] == 1){
-                    pairOf = Determine.pairof(inputArray[i], pairOf);
+                    
+                    all.addAll(inputArray[i]);
                     possibility = Determine.possibility(inputArray[i], possibility);
                 }
                 else continue;
             }
+            //pairOf = Determine.pairof(all, pairOf);
+            output = Determine.finalAnswer(all, possibility);
         }
 
          Background.answer(output);
@@ -386,6 +413,27 @@ class Inside{
 }
 
 class Determine{
+
+    public static List<Character> finalAnswer(List<Character> all, List<Character> possibility){
+        List<Character> output = new ArrayList<>();
+        List<Character> pairof = new ArrayList<>();
+        for(char i : possibility){
+            List<Character> temp = all;
+            temp.add(i);
+            pairof = pairof(temp, pairof);
+            for(char j : pairof){
+                temp.remove(j);
+                temp.remove(j);
+                if(correct3n(temp) == false) continue;
+                else {
+                    output.add(i);
+                    break;
+                }
+            }
+        }
+        
+        return output;
+    }
 
     public static List<Character> pairof(List<Character> input, List<Character> pairof){
         List<Character> have = new ArrayList<>();
