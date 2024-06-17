@@ -96,6 +96,9 @@ class Background extends JFrame{
                 newButtonPanel.removeAll();
                 newButtonPanel.revalidate();
                 newButtonPanel.repaint();
+                answerpanel.removeAll();
+                answerpanel.revalidate();
+                answerpanel.repaint();
                 newButtonCount = 0;
                 for(Character keyy : time.keySet()){
                     time.put(keyy,0); 
