@@ -396,11 +396,7 @@ class Inside{
                         }
                     }
                 }
-                
-                
             }
-            
-
         }
 
         else{
@@ -424,8 +420,8 @@ class Inside{
             }
             output = Determine.finalAnswer(all, possibility);
         }
-        System.out.println(output);
         Collections.sort(output);
+        System.out.println(output);
         return output;
     }
 }
