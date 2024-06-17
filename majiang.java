@@ -63,9 +63,6 @@ class Background extends JFrame{
     }
 
     public void instruction() {//Instruction for Use
-        JDialog dialog = new JDialog(this, true);
-        dialog.setUndecorated(true);
-        dialog.setLayout(new BorderLayout());
         createInitialButton();
         createNewButtonPanel();
         createAnswerButtonPanel();
