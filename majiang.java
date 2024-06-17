@@ -37,7 +37,7 @@ class Background extends JFrame{
 
         ImageIcon imageIcon = new ImageIcon("image\\start.jpg");
         backgroundLabel = new JLabel(imageIcon);
-        backgroundLabel.setBounds(0, 0, 700, 700);//(starting place,size)
+        backgroundLabel.setBounds(-8, -30, 700, 700);//(starting place,size)
         
         JButton nextButton = new JButton("next");
         nextButton.setFont(new Font("Arial", Font.PLAIN, 12));
