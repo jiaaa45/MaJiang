@@ -1,3 +1,4 @@
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,16 +11,9 @@ import javax.swing.Timer;
 
 public class majiang extends JFrame {
     public static int check = 0;
-    private static HashMap<String,List<Character>> map = new HashMap<>();
     public static void main(String[] args) {
         Background bg = new Background();//start, Instruction for Use
 
-    }
-    public static void returnMap(HashMap<String,List<Character>> mapp){
-        map = mapp;
-        for (String key : map.keySet()) {
-            System.out.println("Key: " + key + ", Value: " + map.get(key));
-        }
     }
 
 }
@@ -87,8 +81,11 @@ class Background extends JFrame{
                     majiang.check--;
                 }
                 else if(majiang.check == 1){
-                    HashMap<String,List<Character>> map = getMap();
-                    List<Character> list=Inside.listenWhat(map);
+                    HashMap<String, List<Character>> copiedMap = new HashMap<>();
+                    for (HashMap.Entry<String, List<Character>> entry : map.entrySet()) {
+                        copiedMap.put(entry.getKey(), new LinkedList<>(entry.getValue()));
+                    }
+                    List<Character> list=Inside.listenWhat(copiedMap);
                     answer(list);
                 }
                 else if(majiang.check >= 5)JOptionPane.showMessageDialog(frame, "Calm down!!!!!!!");
