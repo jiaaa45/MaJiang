@@ -264,8 +264,10 @@ class Background extends JFrame{
         getContentPane().repaint();
     }
     public static void answer(List<Character> list){
-        HashMap <Character,String> ans=new HashMap<>();
+        //HashMap <Character,String> ans=new HashMap<>();
         answerpanel.removeAll();
+        answerpanel.revalidate();
+        answerpanel.repaint();
         if(list.size()==0)JOptionPane.showMessageDialog(frame, "No listen!!!!!!");
         //private JPanel answerpanel;
         else{
