@@ -265,6 +265,7 @@ class Background extends JFrame{
     }
     public static void answer(List<Character> list){
         HashMap <Character,String> ans=new HashMap<>();
+        answerpanel.removeAll();
         if(list.size()==0)JOptionPane.showMessageDialog(frame, "No listen!!!!!!");
         //private JPanel answerpanel;
         else{
@@ -273,37 +274,74 @@ class Background extends JFrame{
             String cookie="mnopqrstu";
             int i=1;
             for(char c:million.toCharArray()){
-                if(list.contains(c))ans.put(c, "million"+i);
+                if(list.contains(c)){
+                    ImageIcon icon = new ImageIcon("image\\"+"million"+i+".jpg");
+                    JLabel label = new JLabel(icon);
+                    answerpanel.add(label);
+                }
                 i++;
             }
             i=1;
             for(char c:chain.toCharArray()){
-                if(list.contains(c))ans.put(c, "chain"+i);
+                if(list.contains(c)){
+                    ImageIcon icon = new ImageIcon("image\\"+"chain"+i+".jpg");
+                    JLabel label = new JLabel(icon);
+                    answerpanel.add(label);
+                }
                 i++;
             }
             i=1;
             for(char c:cookie.toCharArray()){
-                if(list.contains(c))ans.put(c, "cookie"+i);
+                if(list.contains(c)){
+                    ImageIcon icon = new ImageIcon("image\\"+"cookie"+i+".jpg");
+                    JLabel label = new JLabel(icon);
+                    answerpanel.add(label);
+                }
                 i++;
             }
-            if(list.contains('A'))ans.put('A', "east");
-            if(list.contains('B'))ans.put('B', "west");
-            if(list.contains('C'))ans.put('C', "south");
-            if(list.contains('D'))ans.put('D', "north");
-            if(list.contains('E'))ans.put('E', "red");
-            if(list.contains('F'))ans.put('F', "fa");
-            if(list.contains('G'))ans.put('G', "white");
-            answerpanel.removeAll();
-            for(Map.Entry<Character,String> entry : ans.entrySet()){
-                ImageIcon icon = new ImageIcon("image\\"+entry.getValue()+".jpg");
+            if(list.contains('A')){
+                ImageIcon icon = new ImageIcon("image\\"+"east"+".jpg");
                 JLabel label = new JLabel(icon);
                 answerpanel.add(label);
             }
+            if(list.contains('B')){
+                ImageIcon icon = new ImageIcon("image\\"+"west"+".jpg");
+                JLabel label = new JLabel(icon);
+                answerpanel.add(label);
+            }
+            if(list.contains('C')){
+                ImageIcon icon = new ImageIcon("image\\"+"south"+".jpg");
+                JLabel label = new JLabel(icon);
+                answerpanel.add(label);
+            }
+            if(list.contains('D')){
+                ImageIcon icon = new ImageIcon("image\\"+"north"+".jpg");
+                JLabel label = new JLabel(icon);
+                answerpanel.add(label);
+            }
+            if(list.contains('E')){
+                ImageIcon icon = new ImageIcon("image\\"+"red"+".jpg");
+                JLabel label = new JLabel(icon);
+                answerpanel.add(label);
+            }
+            if(list.contains('F')){
+                ImageIcon icon = new ImageIcon("image\\"+"fa"+".jpg");
+                JLabel label = new JLabel(icon);
+                answerpanel.add(label);
+            }
+            if(list.contains('G')){
+                ImageIcon icon = new ImageIcon("image\\"+"white"+".jpg");
+                JLabel label = new JLabel(icon);
+                answerpanel.add(label);
+            }
+            //answerpanel.removeAll();
+            
             answerpanel.revalidate();
             answerpanel.repaint();
             }
         majiang.check=0;
     }
+            
 
     class wap extends WindowAdapter{
         public void windowClosing(WindowEvent e){
