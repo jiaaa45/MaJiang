@@ -336,9 +336,11 @@ class Background extends JFrame{
             }
             //answerpanel.removeAll();
             
-            answerpanel.revalidate();
-            answerpanel.repaint();
+            
+            
             }
+        answerpanel.revalidate();
+        answerpanel.repaint();
         majiang.check=0;
     }
             
