@@ -360,6 +360,11 @@ class Inside{
             }
             if(count == 1){
                 System.out.println("only BigWord");
+                for(int i = 0;i < 3;i++){
+                    if(threeOrNot[i] == 0){
+                        if(Determine.correct3n(inputArray[i]) == false) return output;
+                    }
+                }
                 if(time4 > 0) return output;
                 if(time1 == 1 && time2 == 0) output = time1Characters;
                 else if(time1 == 0 && time2 == 2) output = time2Characters;
